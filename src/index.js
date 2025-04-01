@@ -26,7 +26,10 @@ logger.info(`${ chalk.greenBright.underline(packageIdentifierStr) } by ${ chalk.
 
 // Initializing/declaring our variables
 const initTimerStart = process.hrtime.bigint();
-const intents = config.intents.map((intent) => GatewayIntentBits[intent]);
+const intents = [
+  ...config.intents.map((intent) => GatewayIntentBits[intent]),
+  GatewayIntentBits.GuildMessages,
+];
 const presenceActivityMap = config.presence.activities.map(
   (act) => ({
     ...act, type: ActivityType[titleCase(act.type)]
